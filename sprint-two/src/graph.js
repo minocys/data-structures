@@ -46,7 +46,6 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
 
 Graph.prototype.forEachNode = function(cb){
   for(var item in this.storage){
-    console.log('foreach');
     cb(item);
   }
 };
