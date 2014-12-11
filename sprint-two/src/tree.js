@@ -3,7 +3,8 @@ var Tree = function(value){
   newTree.value = value;
 
   // your code here
-  newTree.children = null;  // fix me
+  newTree.children = [];  // fix me
+  _.extend(newTree, treeMethods);
 
   return newTree;
 };
@@ -15,11 +16,27 @@ var Tree = function(value){
 var treeMethods = {};
 
 treeMethods.addChild = function(value){
+  //create newTree
+  var tree = Tree(value);
+  //append newTree to previousTree.children
+  this.children.push(tree);
 
 };
 
 treeMethods.contains = function(target){
 
+  if(this.value === target){
+    return true;
+  }
+
+  if(this.children.length > 0){
+    for(var i = 0; i < this.children.length; i++){
+        if(this.children[i].contains(target)){
+          return true;
+        }
+    }
+  }
+  return false;
 };
 
 

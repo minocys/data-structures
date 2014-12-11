@@ -6,7 +6,6 @@ var LinkedList = function(){
   list.addToTail = function(value){
     //create node
     var newItem = Node(value);
-    console.log(newItem)
     //if no tail node
     if(this.head === null){
       //tail = newItem
@@ -21,12 +20,20 @@ var LinkedList = function(){
   };
 
   list.removeHead = function(){
-    var item = this.head;
+    var item = this.head.value;
     this.head = this.head.next;
     return item;
   };
 
   list.contains = function(target){
+    var node = this.head;
+    while(node.value !== target){
+      node = node.next;
+      if (node === null){
+        return false;
+      }
+    }
+    return true;
   };
 
   return list;
