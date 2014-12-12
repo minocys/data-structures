@@ -66,7 +66,5 @@ describe('linkedList', function() {
     expect(linkedList.tail.value).to.equal(4);
   });
 
-
-
   // add more tests here to test the functionality of linkedList
 });

@@ -6,19 +6,35 @@ var HashTable = function(){
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
   //if item at .storage i
-    //if !array.isarray(storage.i)
-      //HashTable
-  this._storage.set(i, v);
+  var newItem = {};
+  newItem[k] = v;
+  if(!this._storage.get(i)){
+    var array = [newItem];
+    this._storage.set(i, array)
+  } else {
+    this._storage.get(i).push(newItem);
+  }
 };
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  return this._storage.get(i);
+  var array = this._storage.get(i);
+  for(var x = 0; x < array.length; x++){
+    if(array[x].hasOwnProperty(k)){
+      return array[x][k];
+    }
+  }
+  return null;
 };
 
 HashTable.prototype.remove = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  this._storage.set(i, null);
+  var array = this._storage.get(i);
+  for(var x = 0; x < array.length; x++){
+    if(array[x].hasOwnProperty(k)){
+      array.splice(x, 1);
+    }
+  }
 };
 
 
