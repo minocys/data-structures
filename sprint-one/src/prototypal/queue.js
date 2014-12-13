@@ -4,40 +4,31 @@ var Queue = function() {
   var newQueue = Object.create(queueMethods);
   newQueue.first = 0;
   newQueue.key = 0;
-  newQueue.length = 0;
   newQueue.storage = {};
   return newQueue;
 };
 
 var queueMethods = {
   size : function(){
-    return this.length;
+    return this.key - this.first;
   },
 
   enqueue : function(value){
-    this.key++;
-    this.length++;
-    this.storage[this.key] = value;
-    if(this.length === 1){
+    this.storage[this.key++] = value;
+    if(this.size === 1){
       this.first = this.key;
     }
   },
 
   dequeue : function(){
-    if(this.length > 0){
+    if(this.size() > 0){
       var item = this.storage[this.first];
       delete this.storage[this.first];
-      this.length--;
-      if(this.storage[this.first + 1] === undefined){
-        this.first = undefined;
-      } else {
-        this.first++;
-      }
+      this.first = (this.size() > 0) ? this.first + 1 : undefined;
       return item;
-    } 
+    }
     return undefined;
   }
-
 };
 
 

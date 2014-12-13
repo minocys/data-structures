@@ -34,7 +34,18 @@ describe('binarySearchTree', function() {
     binarySearchTree.insert(2);
     binarySearchTree.insert(3);
     binarySearchTree.depthFirstLog(func);
-    console.log(array);
     expect(array).to.eql([5,2,3]);
   });
+
+  it('should return an array of all items in breadth first order using breadthfirstlog', function(){
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(1);
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(8);
+    var array = binarySearchTree.breadthFirstLog();
+    expect(array).to.eql([5,3,7,1,4,6,8]);
+  });
+
 });

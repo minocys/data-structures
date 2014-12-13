@@ -7,15 +7,13 @@ var Set = function(){
 var setPrototype = {};
 
 setPrototype.add = function(item){
-  this._storage[item] = true;
+  this._storage[item] = typeof(item);
 };
 
 setPrototype.contains = function(item){
-  if(item in this._storage){
-    return true;
-  } else {
-    return false;
-  }
+  var type = typeof(item);
+  item = item.toString();
+  return (this._storage[item] === type);
 };
 
 setPrototype.remove = function(item){
