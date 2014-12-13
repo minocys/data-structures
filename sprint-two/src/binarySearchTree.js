@@ -36,7 +36,7 @@ var binaryMethods = {
       return this.right.contains(target);
     }
     if(target < this.value && this.left){
-      returnthis.left.contains(target);
+      return this.left.contains(target);
     }
     return false;
   },
@@ -64,7 +64,6 @@ var binaryMethods = {
       //marker = dequeue
       marker = queue.dequeue();
       result.push(marker.value);
-      console.log(result);
       //if marker.left node
       if(marker.left !== null){
         //enqueue left node
