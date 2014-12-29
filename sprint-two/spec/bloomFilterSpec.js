@@ -8,7 +8,6 @@ describe('bloomFilter', function() {
   it('should have methods named "insert", "remove", and "retrieve', function() {
     expect(bloomFilter.insert).to.be.a("function");
     expect(bloomFilter.retrieve).to.be.a("function");
-    expect(bloomFilter.remove).to.be.a("function");
   });
 
   it('should store values with insert', function() {
@@ -22,12 +21,30 @@ describe('bloomFilter', function() {
     expect(bloomFilter.retrieve('Seagal')).to.equal(false);
   });
 
-  it('should remove values with remove', function() {
-    bloomFilter.insert('Spielberg');
-    bloomFilter.insert('Soderberg');
-    bloomFilter.remove('Spielberg');
-    expect(bloomFilter.retrieve('Spielberg')).to.equal(false);
-    expect(bloomFilter.retrieve('Soderberg')).to.equal(true);
+  describe('bloomFilter loop', function() {
+    var testInputs;
+    var approx = Math.pow(1 - Math.pow(Math.E, ((-15)/18)), 3) * 100;
+
+
+    beforeEach(function() {
+      testInputs = ['hackreactor', 'adobe', 'apple'];
+      testInputs.forEach(function(input) {
+        bloomFilter.insert(input);
+      });
+    });
+  
+    it('should log empircal rate vs. Bloom Filter rate', function() {
+      var falsePositiveCount = 0;
+      testInputs.push('blah', 'great');
+      for (var i = 0; i < 10000; i++) {
+        var random = Math.floor(Math.random() * 5);
+        if (!bloomFilter.retrieve(testInputs[random])) {
+          falsePositiveCount++;
+        }
+      }
+      console.log('Empirical Rate: '+(falsePositiveCount / 100)+'%');
+      console.log('Compared to the Bloom Filter Approximation(m=18, k=3): '+approx+'%');
+    });
   });
 
 });
