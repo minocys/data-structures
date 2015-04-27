@@ -34,15 +34,16 @@ var bTMethods = {
     //if index is <= root.keys.length && value === key
     if ( value === node.keys[index]){
       //return item
-      return node.keys[index];
+      // return node.keys[index];
+      return true;
     }
     //if isLeaf
     if (node.isLeaf){
       //return null
-      return null;
+      return false;
     } else {
       //return search(value, root.children[index])
-      return search(value, node.children[index]);
+      return this.search(value, node.children[index]);
     }
   },
 
@@ -103,7 +104,6 @@ var bTMethods = {
     if(root.isFull()){
       //this.root = makeNode([], [root], false, 0) --- make empty node with old root as child
       var newRoot = this.makeNode();
-      console.log(newRoot);
       newRoot.children.push(root);
       this.root = newRoot;
       //splitChild(this.root, root, 1);

@@ -33,15 +33,23 @@ describe('binarySearchTree', function() {
   //   expect(bTree.children[2].keys[0]).to.equal(8);
   // });
 
-  it('should return correct results with search'), function(){
-    bTree.insert(5);
-    bTree.insert(8);
-    bTree.insert(1);
-    bTree.insert(3);
-    bTree.insert(2);
-    bTree.insert(2);
-    expect(bTree.search(3)).to.equal(3);
-  }
+  it('should return correct results with search', function() {
+    var array = [5,8,1,3,2,2];
+    for(var i = 0;i < array.length; i++){
+      bTree.insert(array[i]);
+    }
+    expect(bTree.search(3)).to.equal(true);
+    expect(bTree.search(7)).to.equal(false);
+  });
 
+  it('should not contain a value that was removed.', function() {
+    var array = [5,8,1,3,2,2];
+    for(var i = 0;i < array.length; i++){
+      bTree.insert(array[i]);
+    }
+    bTree.remove(2);
+    bTree.remove(2);
+    expect(bTree.search(2)).to.equal(false);
+  });
 
 });
