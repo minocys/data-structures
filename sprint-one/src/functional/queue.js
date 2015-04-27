@@ -1,51 +1,49 @@
 var Queue = function(){
   var someInstance = {};
-  //variables for indexes
-  //var head, tail;
-  var head = 0;
-  var tail = 0;
   var length = 0;
-  //variable queueSize
-  //var queueSize = 0;
-
   // Use an object with numeric keys to store values
   var storage = {};
+  var first;
+  var key = 0;
+
 
   // Implement the methods below
 
   someInstance.enqueue = function(value){
-    //increment tail
-    tail++;
-    //Store value
-    storage[tail] = value;
-    //increment length
+    //length ++
     length++;
-    if( length === 1 ){
-      head = tail; 
+    //key ++
+    key++;
+    //add item to storage[key]
+    storage[key] = value;
+    //if length === 1
+    if( length === 1){
+      //first = key;
+      first = key;
     }
-
   };
 
   someInstance.dequeue = function(){
-    //restraint
-    if(length <= 0){
-      length = 0;
-    }else{
-      length--;
+    if( length === 0){
+      return undefined;
     }
-    //remove head value
-    var item = storage[head];
-    delete storage[head];
-    //if something in queue
-    if(length > 0){
-      //point head at next value/increment head
-      head++;
-    } 
+    //length --
+    length--;
+    //retrieve first item storage[first]
+    var item = storage[first];
+    //delete first item
+    delete storage[first];
+    //if there is next item
+    if(storage[first+1] === undefined){
+      //set first to next item (first + 1)
+      first = undefined;
+    } else { 
+      first++;
+    }
     return item;
   };
 
   someInstance.size = function(){
-    //return size
     return length;
   };
 

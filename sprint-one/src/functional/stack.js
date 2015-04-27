@@ -22,7 +22,6 @@ var Stack = function(){
     var result = storage[counter];
     delete storage[counter];
     counter--;
-
     return result;
   };
 
